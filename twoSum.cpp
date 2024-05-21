@@ -1,26 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void twoSum(int nums[], int size, int target)
+vector<int> twoSum(vector<int> &numbers, int target)
 {
-    int n = size;
-    for (int i = 0; i < n - 1; i++)
+    int n = numbers.size();
+    int start = 0, end = n - 1;
+
+    while (start < end)
     {
-        for (int j = i + 1; j < n; j++)
+        int sum = numbers[start] + numbers[end];
+        if (sum == target)
         {
-            if (nums[i] + nums[j] == target)
-            {
-                cout << i << " " << j << endl;
-            }
+            return {start + 1, end + 1};
+        }
+        else if (sum > target)
+        {
+            end--;
+        }
+        else
+        {
+            start++;
         }
     }
-    cout << -1; //
+    return {-1, -1};
 }
 
 int main()
 {
-    int nums[] = {2, 7, 11, 15};
-
-    twoSum(nums, 4, 13);
+    int n, target;
+    cin >> n >> target;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    vector<int> res;
+    res = twoSum(arr, target);
+    for (int i = 0; i < res.size(); i++)
+    {
+        cout << res[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
